@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: evalops/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
+        uses: dx-corp/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
         with:
           go-version-file: go.mod
           check-latest: true
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: evalops/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
+        uses: dx-corp/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
         with:
           go-version-file: go.mod
           check-latest: true
@@ -116,7 +116,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: evalops/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
+        uses: dx-corp/service-runtime/.github/actions/setup-go-service@ca09da8302203b96582332dbcababe9f2d906d10
         with:
           go-version-file: go.mod
           check-latest: true
