@@ -1,5 +1,7 @@
 PROJECT_NAME := keep
 GOLANGCI_LINT_VERSION ?= 1.64.8
+ANALYSIS_X_TOOLS_VERSION := v0.52.0
+ANALYSIS_STATICCHECK_VERSION := v0.8.2
 GOBIN := $(shell go env GOPATH)/bin
 GOLANGCI_LINT ?= $(GOBIN)/golangci-lint
 GOIMPORTS ?= $(GOBIN)/goimports
@@ -122,7 +124,8 @@ install-format-tools:
 install-lint-tools:
 	@echo "Installing lint tools..."
 	mkdir -p $(GOBIN)
-	GOPROXY=https://proxy.golang.org,direct go install github.com/golangci/golangci-lint/cmd/golangci-lint@v$(GOLANGCI_LINT_VERSION)
+	GOBIN=$(GOBIN) GOPROXY=https://proxy.golang.org,direct bash scripts/install-go-analysis-tool.sh github.com/golangci/golangci-lint/cmd/golangci-lint v$(GOLANGCI_LINT_VERSION) $(ANALYSIS_X_TOOLS_VERSION) honnef.co/go/tools@$(ANALYSIS_STATICCHECK_VERSION)
+	$(GOLANGCI_LINT) cache clean
 	uv tool install flake8
 	uv tool install mypy
 
@@ -130,7 +133,7 @@ install-security-tools:
 	@echo "Installing security tools..."
 	mkdir -p $(GOBIN)
 	go install golang.org/x/vuln/cmd/govulncheck@latest
-	go install github.com/securego/gosec/v2/cmd/gosec@v2.22.6
+	GOBIN=$(GOBIN) bash scripts/install-go-analysis-tool.sh github.com/securego/gosec/v2/cmd/gosec v2.22.6 $(ANALYSIS_X_TOOLS_VERSION)
 
 install-opa:
 	@echo "Ensuring OPA CLI is available..."
