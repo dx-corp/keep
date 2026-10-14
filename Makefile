@@ -125,6 +125,7 @@ install-lint-tools:
 	@echo "Installing lint tools..."
 	mkdir -p $(GOBIN)
 	GOBIN=$(GOBIN) GOPROXY=https://proxy.golang.org,direct bash scripts/install-go-analysis-tool.sh github.com/golangci/golangci-lint/cmd/golangci-lint v$(GOLANGCI_LINT_VERSION) $(ANALYSIS_X_TOOLS_VERSION) honnef.co/go/tools@$(ANALYSIS_STATICCHECK_VERSION)
+	$(GOLANGCI_LINT) cache clean
 	uv tool install flake8
 	uv tool install mypy
 
