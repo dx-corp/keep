@@ -74,7 +74,7 @@ func TestGenerateSigningKey(t *testing.T) {
 		}
 
 		// Keys should be different
-		if priv1.D.Cmp(priv2.D) == 0 {
+		if priv1.Equal(priv2) {
 			t.Error("Expected different keys, but got the same key")
 		}
 	})
@@ -128,7 +128,7 @@ func TestLoadSigningKey(t *testing.T) {
 		}
 
 		// Verify they're the same key
-		if originalKey.D.Cmp(loadedKey.D) != 0 {
+		if !originalKey.Equal(loadedKey) {
 			t.Error("Loaded key does not match original key")
 		}
 

@@ -1,6 +1,7 @@
 PROJECT_NAME := keep
 GOLANGCI_LINT_VERSION ?= 1.64.8
 ANALYSIS_X_TOOLS_VERSION := v0.52.0
+ANALYSIS_STATICCHECK_VERSION := v0.8.2
 GOBIN := $(shell go env GOPATH)/bin
 GOLANGCI_LINT ?= $(GOBIN)/golangci-lint
 GOIMPORTS ?= $(GOBIN)/goimports
@@ -123,7 +124,7 @@ install-format-tools:
 install-lint-tools:
 	@echo "Installing lint tools..."
 	mkdir -p $(GOBIN)
-	GOBIN=$(GOBIN) GOPROXY=https://proxy.golang.org,direct bash scripts/install-go-analysis-tool.sh github.com/golangci/golangci-lint/cmd/golangci-lint v$(GOLANGCI_LINT_VERSION) $(ANALYSIS_X_TOOLS_VERSION)
+	GOBIN=$(GOBIN) GOPROXY=https://proxy.golang.org,direct bash scripts/install-go-analysis-tool.sh github.com/golangci/golangci-lint/cmd/golangci-lint v$(GOLANGCI_LINT_VERSION) $(ANALYSIS_X_TOOLS_VERSION) honnef.co/go/tools@$(ANALYSIS_STATICCHECK_VERSION)
 	uv tool install flake8
 	uv tool install mypy
 
